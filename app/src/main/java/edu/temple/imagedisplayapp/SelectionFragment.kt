@@ -28,7 +28,6 @@ class SelectionFragment : Fragment() {
         }
     }
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -40,14 +39,14 @@ class SelectionFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
-        recyclerView.layoutManager = GridLayoutManager(this, 3)
-        recyclerView.adapter = ImageAdapter(items, clickEvent)
+            val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
+            recyclerView.layoutManager = GridLayoutManager(this, 3)
+            recyclerView.adapter = ImageAdapter(items, clickEvent)
 
         with (view as RecyclerView) {
             image?.run {
                 val clickEvent = {
-                        images:Image -> ImageViewModel.setSelectedImage(images)
+                        image:Image -> ImageViewModel.setSelectedImage(image)
                 }
                 //layoutManager = GridLayoutManager(requireContext())
                 //adapter = ImageAdapter(this, clickEvent)
@@ -55,9 +54,7 @@ class SelectionFragment : Fragment() {
             }
         }
     }
-//    interface SelectionFragmentInterface {
-//        fun imageSelected()
-  //  }
+
     companion object {
         @JvmStatic
         fun newInstance() =
