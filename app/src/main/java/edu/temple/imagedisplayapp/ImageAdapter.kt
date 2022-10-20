@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 class ImageAdapter (_items : Array<Item>, _clickEvent: (Item)->Unit) : RecyclerView.Adapter<ImageAdapter.ViewHolder>(){
 
-    private val items = _items
+    val items = _items
     val clickEvent = _clickEvent
 
     class ViewHolder(_layout: LinearLayout) : RecyclerView.ViewHolder(_layout) {

@@ -8,25 +8,23 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/container_1"
-        android:layout_width="409dp"
-        android:layout_height="366dp"
+        android:layout_width="392dp"
+        android:layout_height="382dp"
         android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/container_2"
         app:layout_constraintHeight_percent=".1"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout="@layout/fragment_selection" />
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/container_2"
-        android:layout_width="407dp"
-        android:layout_height="321dp"
+        android:layout_width="310dp"
+        android:layout_height="381dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.125"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/container_1"
         tools:layout="@layout/fragment_display" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,10 +3,9 @@ package edu.temple.imagedisplayapp
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 
-class SelectionActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
+
     /**
      * Companion objects are used in Kotlin
      * as containers of public static fields
@@ -20,32 +19,40 @@ class SelectionActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         // Set the title for the activity.
-        // This is done to ensure that the activity label
-        // displayed in the Android launcher is different
         supportActionBar?.title = "Selector"
 
         val items = generateTestData()
 
-        val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
+        //val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
+        //recyclerView.layoutManager = GridLayoutManager(this, 3)
 
-
-        recyclerView.layoutManager = GridLayoutManager(this, 3)
-
-        val clickEvent = {item: Item ->
+        val clickEvent = { item: Item ->
             // Item object can be placed directly inside Intent because
             // the Item class implements the Parcelable interface
-            val launchIntent = Intent(this, DisplayActivity::class.java)
+            val launchIntent = Intent(this, DisplayFragment::class.java)
                 .putExtra(ITEM_KEY, item)
 
             startActivity(launchIntent)
         }
 
-        recyclerView.adapter = ImageAdapter(items, clickEvent)
+        //recyclerView.adapter = ImageAdapter(items, clickEvent)
+        fun imageSelected() {
+            //fragments
+            if (savedInstanceState == null) {
+                supportFragmentManager
+                    .beginTransaction()
+                    .add(R.id.container_1, SelectionFragment.newInstance())
+                    .add(R.id.container_2, DisplayFragment())
+                    .commit()
+            }
+        }
+
+        /**
+         * Feel free to change these resources to whatever you'd like
+         */
+
     }
 
-    /**
-     * Feel free to change these resources to whatever you'd like
-     */
     fun generateTestData(): Array<Item> {
         return arrayOf(
             Item(R.drawable.ccf_original, "Original"),
@@ -66,3 +73,4 @@ class SelectionActivity : AppCompatActivity() {
         )
     }
 }
+
