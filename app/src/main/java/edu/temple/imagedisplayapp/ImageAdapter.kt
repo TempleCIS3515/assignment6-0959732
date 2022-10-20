@@ -1,4 +1,5 @@
 package edu.temple.imagedisplayapp
+
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -6,7 +7,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class ImageAdapter (_items : Array<Item>, _clickEvent: (Item)->Unit) : RecyclerView.Adapter<ImageAdapter.ViewHolder>(){
+class ImageAdapter (_items : Array<Image>, _clickEvent: (Image)->Unit) : RecyclerView.Adapter<ImageAdapter.ViewHolder>(){
 
     val items = _items
     val clickEvent = _clickEvent

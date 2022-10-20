@@ -6,10 +6,6 @@ import android.os.Bundle
 
 class MainActivity : AppCompatActivity() {
 
-    /**
-     * Companion objects are used in Kotlin
-     * as containers of public static fields
-     */
     companion object {
         val ITEM_KEY = "key"
     }
@@ -18,59 +14,62 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+            supportFragmentManager
+                .beginTransaction()
+                .add(R.id.container_1, SelectionFragment.newInstance(generateTestData()))
+                .add(R.id.container_2, DisplayFragment())
+                .commit()
+
+
+
+
         // Set the title for the activity.
         supportActionBar?.title = "Selector"
 
-        val items = generateTestData()
-
+        //val items = generateTestData()
         //val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
         //recyclerView.layoutManager = GridLayoutManager(this, 3)
 
-        val clickEvent = { item: Item ->
-            // Item object can be placed directly inside Intent because
-            // the Item class implements the Parcelable interface
-            val launchIntent = Intent(this, DisplayFragment::class.java)
-                .putExtra(ITEM_KEY, item)
-
-            startActivity(launchIntent)
-        }
+//        val clickEvent = { item: Image ->
+//            // Item object can be placed directly inside Intent because
+//            // the Item class implements the Parcelable interface
+//            val launchIntent = Intent(this, DisplayFragment::class.java)
+//                .putExtra(ITEM_KEY, item)
+//
+//            startActivity(launchIntent)
+//        }
 
         //recyclerView.adapter = ImageAdapter(items, clickEvent)
-        fun imageSelected() {
-            //fragments
-            if (savedInstanceState == null) {
-                supportFragmentManager
-                    .beginTransaction()
-                    .add(R.id.container_1, SelectionFragment.newInstance())
-                    .add(R.id.container_2, DisplayFragment())
-                    .commit()
-            }
+
+//            //fragments
+//            if (savedInstanceState == null) {
+//                supportFragmentManager
+//                    .beginTransaction()
+//                    .add(R.id.container_1, SelectionFragment.newInstance())
+//                    .add(R.id.container_2, DisplayFragment())
+//                    .commit()
+//            }
         }
-
-        /**
-         * Feel free to change these resources to whatever you'd like
-         */
-
     }
 
-    fun generateTestData(): Array<Item> {
+    fun generateTestData(): Array<Image> {
         return arrayOf(
-            Item(R.drawable.ccf_original, "Original"),
-            Item(R.drawable.ccf_freshstrawberry, "Fresh Strawberry"),
-            Item(R.drawable.ccf_chocolatecaramelicious, "Chocolate Caramelicious Cheesecake "),
-            Item(R.drawable.ccf_pineappleupsidedown, "Pineapple Upside-Down"),
-            Item(R.drawable.ccf_celebration, "Celebration"),
-            Item(R.drawable.ccf_caramelapple, "Caramel Apple"),
-            Item(
+            Image(R.drawable.ccf_original, "Original"),
+            Image(R.drawable.ccf_freshstrawberry, "Fresh Strawberry"),
+            Image(R.drawable.ccf_chocolatecaramelicious, "Chocolate Caramelicious Cheesecake "),
+            Image(R.drawable.ccf_pineappleupsidedown, "Pineapple Upside-Down"),
+            Image(R.drawable.ccf_celebration, "Celebration"),
+            Image(R.drawable.ccf_caramelapple, "Caramel Apple"),
+            Image(
                 R.drawable.ccf_verycherryghirardellichocolate,
                 "Very Cherry Ghirardelli® Chocolate"
             ),
-            Item(R.drawable.ccf_lowlicious, "Low-Licious"),
-            Item(R.drawable.ccf_cinnaboncinnamoncwirl, "Cinnabon® Cinnamon Swirl"),
-            Item(R.drawable.ccf_godiva, "Godiva® Chocolate"),
-            Item(R.drawable.ccf_coconutcreampie, "Coconut Cream Pie"),
-            Item(R.drawable.ccf_saltedcaramel, "Salted Caramel")
+            Image(R.drawable.ccf_lowlicious, "Low-Licious"),
+            Image(R.drawable.ccf_cinnaboncinnamoncwirl, "Cinnabon® Cinnamon Swirl"),
+            Image(R.drawable.ccf_godiva, "Godiva® Chocolate"),
+            Image(R.drawable.ccf_coconutcreampie, "Coconut Cream Pie"),
+            Image(R.drawable.ccf_saltedcaramel, "Salted Caramel")
         )
     }
-}
+
 

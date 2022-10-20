@@ -1,19 +1,20 @@
 package edu.temple.imagedisplayapp
 
+
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class ImageViewModel : ViewModel() {
-    val selectedimage : MutableLiveData<String> by lazy {
-        MutableLiveData<String>()
+    val selectedimage : MutableLiveData<Image> by lazy {
+        MutableLiveData<Image>()
     }
 
-    fun setSelectedImage(image: Item) {
-        selectedimage.value = image.toString()
+    fun setSelectedImage(image: Image) {
+        selectedimage.value = image
     }
 
-    fun getSelectedImage() : LiveData<String> {
+    fun getSelectedImage() : LiveData<Image> {
         return selectedimage
     }
 }

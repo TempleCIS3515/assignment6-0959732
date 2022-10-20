@@ -9,7 +9,7 @@ import android.os.Parcelable
  * This could also be accomplished
  * by implementing the _Serializable_ interface
  */
-data class Item(val resourceId: Int, val description: String) : Parcelable {
+data class Image(val resourceId: Int, val description: String) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
         parcel.readString().toString()
@@ -24,12 +24,12 @@ data class Item(val resourceId: Int, val description: String) : Parcelable {
         return 0
     }
 
-    companion object CREATOR : Parcelable.Creator<Item> {
-        override fun createFromParcel(parcel: Parcel): Item {
-            return Item(parcel)
+    companion object CREATOR : Parcelable.Creator<Image> {
+        override fun createFromParcel(parcel: Parcel): Image {
+            return Image(parcel)
         }
 
-        override fun newArray(size: Int): Array<Item?> {
+        override fun newArray(size: Int): Array<Image?> {
             return arrayOfNulls(size)
         }
     }

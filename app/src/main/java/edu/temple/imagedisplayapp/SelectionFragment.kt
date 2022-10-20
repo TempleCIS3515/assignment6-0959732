@@ -1,21 +1,25 @@
 package edu.temple.imagedisplayapp
 
-import android.media.Image
+
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import edu.temple.imagedisplayapp.MainActivity.Companion.ITEM_KEY
 
 class SelectionFragment : Fragment() {
-
-    private var image: Array<Item>? = null
+    lateinit var recyclerView : RecyclerView
+    lateinit var image: Array<Image>
     private lateinit var imageViewModel: ImageViewModel
-
+    private val ITEM_KEY = "items"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,8 +27,8 @@ class SelectionFragment : Fragment() {
         imageViewModel = ViewModelProvider(requireActivity()).get(ImageViewModel::class.java)
 
         arguments?.let {
-            image = it.getParcelableArray(ITEM_KEY) as Array<Item>
-            image = it.getStringArray(ITEM_KEY) as Array<Item>
+            //image = it.getParcelableArray(ITEM_KEY) as Array<Image>
+            image = it.getSerializable(ITEM_KEY) as Array<Image>
         }
     }
 
@@ -33,35 +37,28 @@ class SelectionFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_selection, container, false)
+        return inflater.inflate(R.layout.fragment_selection, container, false).also {
+
+            recyclerView = it.findViewById(R.id.recyclerView) }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-            val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
-            recyclerView.layoutManager = GridLayoutManager(this, 3)
-            recyclerView.adapter = ImageAdapter(items, clickEvent)
-
-        with (view as RecyclerView) {
-            image?.run {
                 val clickEvent = {
-                        image:Image -> ImageViewModel.setSelectedImage(image)
+                        image:Image -> imageViewModel.setSelectedImage(image)
                 }
-                //layoutManager = GridLayoutManager(requireContext())
-                //adapter = ImageAdapter(this, clickEvent)
-                //recyclerView.layoutManager = GridLayoutManager(this, 3)
+                recyclerView.layoutManager = GridLayoutManager(requireContext(), 3)
+                recyclerView.adapter = ImageAdapter(image, clickEvent)
             }
-        }
-    }
 
     companion object {
         @JvmStatic
-        fun newInstance() =
+        fun newInstance(items : Array<Image>) =
             SelectionFragment().apply {
                 arguments = Bundle().apply {
-                    putStringArray(ITEM_KEY, image)
+                    putSerializable(ITEM_KEY, items)
                 }
             }
     }
-}
+    }
