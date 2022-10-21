@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import edu.temple.imagedisplayapp.MainActivity.Companion.ITEM_KEY
 
 class SelectionFragment : Fragment() {
+
     lateinit var recyclerView : RecyclerView
     lateinit var image: Array<Image>
     private lateinit var imageViewModel: ImageViewModel
@@ -32,8 +33,7 @@ class SelectionFragment : Fragment() {
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
-    {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_selection, container, false).also {
             recyclerView = it.findViewById(R.id.recyclerView)
@@ -45,11 +45,10 @@ class SelectionFragment : Fragment() {
     {
         super.onViewCreated(view, savedInstanceState)
 
-                val clickEvent = {
-                        image:Image -> imageViewModel.setSelectedImage(image)
+                val clickEvent = { image: Image ->
+                    imageViewModel.setSelectedImage(image)
 
                 }
-
                 recyclerView.layoutManager = GridLayoutManager(requireContext(), 3)
                 recyclerView.adapter = ImageAdapter(image, clickEvent)
 
