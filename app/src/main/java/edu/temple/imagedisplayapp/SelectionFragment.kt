@@ -24,11 +24,10 @@ class SelectionFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        //view model
         imageViewModel = ViewModelProvider(requireActivity()).get(ImageViewModel::class.java)
 
         arguments?.let {
-            //image = it.getParcelableArray(ITEM_KEY) as Array<Image>
             image = it.getSerializable(ITEM_KEY) as Array<Image>
         }
     }
@@ -44,23 +43,19 @@ class SelectionFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?)
     {
         super.onViewCreated(view, savedInstanceState)
-
-                val clickEvent = { image: Image ->
-                    imageViewModel.setSelectedImage(image)
-
-                }
-                recyclerView.layoutManager = GridLayoutManager(requireContext(), 3)
-                recyclerView.adapter = ImageAdapter(image, clickEvent)
-
+                val clickEvent = { image: Image -> imageViewModel.setSelectedImage(image) }
+        // to layout manager
+        recyclerView.layoutManager = GridLayoutManager(requireContext(), 3)
+        // to image adapter
+        recyclerView.adapter = ImageAdapter(image, clickEvent)
             }
 
     companion object {
         @JvmStatic
-        fun newInstance(items : Array<Image>) =
-            SelectionFragment().apply {
-                arguments = Bundle().apply {
+        fun newInstance(items : Array<Image>) = SelectionFragment().apply{
+                arguments = Bundle().apply{
                     putSerializable(ITEM_KEY, items)
                 }
             }
     }
-    }
+}
